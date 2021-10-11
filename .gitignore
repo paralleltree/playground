@@ -18,3 +18,11 @@
 
 *.test
 *.out
+
+# Rust
+debug/
+target/
+
+**/*.rs.bk
+
+*.pdb
