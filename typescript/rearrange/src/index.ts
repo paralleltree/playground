@@ -1,29 +1,20 @@
-import { existsSync, mkdirSync } from 'fs';
-import * as fs from 'fs/promises';
-import { dirname, sep } from 'path';
+import { Options } from './options'
+import { PartitionOperation } from './partition_operation'
 
 const main = async () => {
   const [, , ...args] = process.argv;
   if (args.length == 0) {
-    console.log('Usage: rearrange <delimiter>');
+    console.log('Usage: rearrange [--gather] <delimiter>');
     return;
   }
 
-  let targetDirPath = '.';
-  let delimiter = args[0];
+  const opts = new Options(args);
 
-  // non-recursive
-  const targetDir = await fs.readdir(targetDirPath, { withFileTypes: true });
-  const targetFiles = targetDir.filter(file => file.isFile()).map(file => file.name);
+  if (opts.isInverse) {
 
-  targetFiles.forEach(async file => {
-    const dest = file.replace(delimiter, sep);
-    const destDir = dirname(dest);
-    if (!existsSync(dest)) {
-      mkdirSync(destDir, { recursive: true });
-    }
-    await fs.rename(file, dest);
-  });
+  } else {
+    await new PartitionOperation('.', opts.delimiter).exec();
+  }
 }
 
 main();
