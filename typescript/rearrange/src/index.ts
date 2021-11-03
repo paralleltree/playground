@@ -1,5 +1,15 @@
 import { Options } from './options'
+import { Operation } from './operation'
 import { PartitionOperation } from './partition_operation'
+import { GatherOperation } from './gather_operation'
+
+const getOperation = (opts: Options): Operation => {
+  if (opts.isInverse) {
+    return new GatherOperation(".", opts.delimiter);
+  } else {
+    return new PartitionOperation('.', opts.delimiter);
+  }
+}
 
 const main = async () => {
   const [, , ...args] = process.argv;
@@ -9,12 +19,8 @@ const main = async () => {
   }
 
   const opts = new Options(args);
-
-  if (opts.isInverse) {
-
-  } else {
-    await new PartitionOperation('.', opts.delimiter).exec();
-  }
+  const op = getOperation(opts);
+  await op.exec();
 }
 
 main();

@@ -1,5 +1,6 @@
-export interface IOperation {
-  targetPath: string
-  delimiter: string
-  exec(): Promise<void>
+export abstract class Operation {
+  constructor(protected targetPath: string, protected delimiter: string) {
+  }
+
+  abstract exec(): Promise<void>;
 }
