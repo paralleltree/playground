@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
-
+import AuthenticationForm from "../views/AuthenticationForm.vue"
+import Graphs from "../views/Graphs.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    redirect: "/auth",
+    // component: Home,
   },
   {
     path: "/about",
@@ -15,6 +17,17 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/auth",
+    name: "Authentication",
+    component: AuthenticationForm,
+  },
+  {
+    path: "/graphs",
+    name: "Graphs",
+    component: Graphs,
+    props: true
   },
 ];
 
