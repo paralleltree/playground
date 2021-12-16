@@ -4,6 +4,7 @@
     <ul>
       <li v-for="graph in graphs" v-bind:key="graph.id">
         {{ graph.name }}
+        <button v-on:click="increment(graph.id)">Increment</button>
       </li>
     </ul>
     <p>{{userName}}</p>
@@ -27,6 +28,12 @@ export default defineComponent({
     token: {
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    increment(graphId: string) {
+      const client = new PixelaApiClient();
+      client.incrementGraph(this.userName, this.token, graphId);
     },
   },
   setup: (props) => {

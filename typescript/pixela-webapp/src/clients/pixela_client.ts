@@ -12,6 +12,16 @@ export class PixelaApiClient {
     return res.data.graphs;
   }
 
+  async incrementGraph(userName: string, token: string, graphId: string): Promise<void> {
+    const url = this.buildUrl(`/users/${userName}/graphs/${graphId}/increment`);
+    return await axios.put(url, "", {
+      headers: {
+        "X-USER-TOKEN": token,
+        "Content-Length": "0",
+      },
+    });
+  }
+
   private buildUrl(path: string): string {
     return `https://pixe.la/v1${path}`;
   }
