@@ -42,19 +42,19 @@ export default defineComponent({
     },
   },
   methods: {
-    increment(graphId: string) {
+    async increment(graphId: string) {
       const client = new PixelaApiClient();
-      client.incrementGraph(this.userName, this.token, graphId);
+      await client.incrementGraph(this.userName, this.token, graphId);
     },
-    decrement(graphId: string) {
+    async decrement(graphId: string) {
       const client = new PixelaApiClient();
-      client.decrementGraph(this.userName, this.token, graphId);
+      await client.decrementGraph(this.userName, this.token, graphId);
     },
-    deleteGraph(graphId: string) {
+    async deleteGraph(graphId: string) {
       if (!confirm(`Are you sure to delete ${graphId}`)) return;
       const client = new PixelaApiClient();
-      client.deleteGraph(this.userName, this.token, graphId);
-      this.fetchFunc();
+      await client.deleteGraph(this.userName, this.token, graphId);
+      await this.fetchFunc();
     },
   },
   setup: (props) => {
