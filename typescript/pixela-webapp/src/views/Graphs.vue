@@ -3,8 +3,15 @@
     <p>グラフだよーーん</p>
     <ul>
       <li v-for="graph in graphs" v-bind:key="graph.id">
-        {{ graph.name }}
-        <button v-on:click="increment(graph.id)">Increment</button>
+        <div>
+          <a
+            :href="`https://pixe.la/v1/users/${userName}/graphs/${graph.id}.html`"
+            >{{ graph.name }}</a
+          >
+        </div>
+        <div>
+          <button v-on:click="increment(graph.id)">Increment</button>
+        </div>
       </li>
     </ul>
     <p>{{userName}}</p>
