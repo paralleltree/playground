@@ -48,6 +48,16 @@ export class PixelaApiClient {
     })
   }
 
+  async deleteGraph(userName: string, token: string, id: string) {
+    const url = this.buildUrl(`/users/${userName}/graphs/${id}`);
+    return await axios.delete(url, {
+      headers: {
+        "X-USER-TOKEN": token,
+      },
+    });
+  }
+
+
   private buildUrl(path: string): string {
     return `https://pixe.la/v1${path}`;
   }

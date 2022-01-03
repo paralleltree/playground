@@ -13,6 +13,7 @@
         <div>
           <button v-on:click="increment(graph.id)">Increment</button>
           <button v-on:click="decrement(graph.id)">Decrement</button>
+          <button v-on:click="deleteGraph(graph.id)">Delete Graph</button>
         </div>
       </li>
     </ul>
@@ -49,6 +50,12 @@ export default defineComponent({
       const client = new PixelaApiClient();
       client.decrementGraph(this.userName, this.token, graphId);
     },
+    deleteGraph(graphId: string) {
+      if (!confirm(`Are you sure to delete ${graphId}`)) return;
+      const client = new PixelaApiClient();
+      client.deleteGraph(this.userName, this.token, graphId);
+      this.fetchFunc();
+    },
   },
   setup: (props) => {
     const graphs = ref<Graph[]>([]);
@@ -66,6 +73,7 @@ export default defineComponent({
 
     fetch();
     return {
+      fetchFunc: fetch,
       graphs,
     }
   }
