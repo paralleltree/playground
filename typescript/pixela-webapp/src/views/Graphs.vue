@@ -11,6 +11,7 @@
         </div>
         <div>
           <button v-on:click="increment(graph.id)">Increment</button>
+          <button v-on:click="decrement(graph.id)">Decrement</button>
         </div>
       </li>
     </ul>
@@ -41,6 +42,10 @@ export default defineComponent({
     increment(graphId: string) {
       const client = new PixelaApiClient();
       client.incrementGraph(this.userName, this.token, graphId);
+    },
+    decrement(graphId: string) {
+      const client = new PixelaApiClient();
+      client.decrementGraph(this.userName, this.token, graphId);
     },
   },
   setup: (props) => {

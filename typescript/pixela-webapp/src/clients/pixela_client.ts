@@ -22,6 +22,16 @@ export class PixelaApiClient {
     });
   }
 
+  async decrementGraph(userName: string, token: string, graphId: string): Promise<void> {
+    const url = this.buildUrl(`/users/${userName}/graphs/${graphId}/decrement`);
+    return await axios.put(url, "", {
+      headers: {
+        "X-USER-TOKEN": token,
+        "Content-Length": "0",
+      },
+    });
+  }
+
   private buildUrl(path: string): string {
     return `https://pixe.la/v1${path}`;
   }
