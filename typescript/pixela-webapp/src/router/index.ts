@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import AuthenticationForm from "../views/AuthenticationForm.vue"
 import Graphs from "../views/Graphs.vue";
+import NewGraph from "../views/NewGraph.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -27,6 +28,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/graphs",
     name: "Graphs",
     component: Graphs,
+    props: true
+  },
+  {
+    path: "/graph/new",
+    name: "NewGraph",
+    component: NewGraph,
     props: true
   },
 ];

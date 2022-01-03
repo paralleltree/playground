@@ -1,4 +1,4 @@
-import { Graph } from "@/models/graph";
+import { Graph, GraphColor, GraphType } from "@/models/graph";
 import axios from "axios";
 
 export class PixelaApiClient {
@@ -30,6 +30,22 @@ export class PixelaApiClient {
         "Content-Length": "0",
       },
     });
+  }
+
+  async createGraph(userName: string, token: string, id: string, name: string, unit: string, type: GraphType, color: GraphColor) {
+    const url = this.buildUrl(`/users/${userName}/graphs`);
+    const graph = {
+      id: id,
+      name: name,
+      unit: unit,
+      type: type,
+      color: color,
+    }
+    return await axios.post(url, JSON.stringify(graph), {
+      headers: {
+        "X-USER-TOKEN": token,
+      },
+    })
   }
 
   private buildUrl(path: string): string {

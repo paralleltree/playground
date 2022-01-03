@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>グラフだよーーん</p>
+    <router-link :to="{ name: 'NewGraph', params: { userName: this.userName, token: this.token }}">Create new graph</router-link>
     <ul>
       <li v-for="graph in graphs" v-bind:key="graph.id">
         <div>
@@ -23,6 +24,7 @@
 import { PixelaApiClient } from "@/clients/pixela_client";
 import { Graph } from "@/models/graph";
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Graphs",
@@ -50,6 +52,7 @@ export default defineComponent({
   },
   setup: (props) => {
     const graphs = ref<Graph[]>([]);
+    const router = useRouter();
     const fetch = async () => {
       const client = new PixelaApiClient();
       try {
